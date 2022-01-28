@@ -10,15 +10,12 @@
       "options": {
         "compiler": "babel",
         "outputPath": "dist/packages/front",
-        "index": "packages/front/src/index.html",
+        "index": "packages/front/static/index.html",
         "baseHref": "/",
         "main": "packages/front/src/main.tsx",
         "polyfills": "packages/front/src/polyfills.ts",
         "tsConfig": "packages/front/tsconfig.app.json",
-        "assets": [
-          "packages/front/src/favicon.ico",
-          "packages/front/src/assets"
-        ],
+        "assets": ["packages/front/src/assets"],
         "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
