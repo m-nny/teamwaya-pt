@@ -8,7 +8,7 @@ import {
 import { QuizEntity } from './models/quiz.entity';
 import { QuizService } from './quiz.service';
 
-@Controller('/quiz')
+@Controller('/quizes')
 export class QuizController {
   public constructor(private readonly quizService: QuizService) {}
 
