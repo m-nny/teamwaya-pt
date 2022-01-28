@@ -15,7 +15,7 @@
       }
     }
   },
-  "defaultProject": "personality-test",
+  "defaultProject": "back",
   "generators": {
     "@nrwl/react": {
       "application": {

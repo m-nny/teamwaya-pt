@@ -1,10 +1,10 @@
 module.exports = {
-  displayName: 'self',
+  displayName: 'front',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/packages/self',
+  coverageDirectory: '../../coverage/packages/front',
 };

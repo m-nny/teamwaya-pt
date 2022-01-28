@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "personality-test": "packages/personality-test",
-    "self": "packages/self"
+    "back": "packages/back",
+    "front": "packages/front"
   }
 }

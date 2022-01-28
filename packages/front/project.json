@@ -1,6 +1,6 @@
 {
-  "root": "packages/self",
-  "sourceRoot": "packages/self/src",
+  "root": "packages/front",
+  "sourceRoot": "packages/front/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,13 +9,16 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/packages/self",
-        "index": "packages/self/src/index.html",
+        "outputPath": "dist/packages/front",
+        "index": "packages/front/src/index.html",
         "baseHref": "/",
-        "main": "packages/self/src/main.tsx",
-        "polyfills": "packages/self/src/polyfills.ts",
-        "tsConfig": "packages/self/tsconfig.app.json",
-        "assets": ["packages/self/src/favicon.ico", "packages/self/src/assets"],
+        "main": "packages/front/src/main.tsx",
+        "polyfills": "packages/front/src/polyfills.ts",
+        "tsConfig": "packages/front/tsconfig.app.json",
+        "assets": [
+          "packages/front/src/favicon.ico",
+          "packages/front/src/assets"
+        ],
         "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
@@ -24,8 +27,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "packages/self/src/environments/environment.ts",
-              "with": "packages/self/src/environments/environment.prod.ts"
+              "replace": "packages/front/src/environments/environment.ts",
+              "with": "packages/front/src/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -40,12 +43,12 @@
     "serve": {
       "executor": "@nrwl/web:dev-server",
       "options": {
-        "buildTarget": "self:build",
+        "buildTarget": "front:build",
         "hmr": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "self:build:production",
+          "buildTarget": "front:build:production",
           "hmr": false
         }
       }
@@ -54,14 +57,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/self/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["packages/front/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/self"],
+      "outputs": ["coverage/packages/front"],
       "options": {
-        "jestConfig": "packages/self/jest.config.js",
+        "jestConfig": "packages/front/jest.config.js",
         "passWithNoTests": true
       }
     }
