@@ -1,5 +1,8 @@
+import { Space } from 'antd';
 import styled from 'styled-components';
 import { Question, QuestionProps } from './components/question';
+import { QuizResults, QuizResultsProps } from './components/quiz-results';
+import { StartQuiz, StartQuizProps } from './components/start-quiz';
 
 const defaultQustion: QuestionProps = {
   title: `You're really busy at work and a colleague is telling you their life story and personal woes. You:`,
@@ -13,13 +16,25 @@ const defaultQustion: QuestionProps = {
   ],
 };
 
+const defaultQuiz: StartQuizProps = {
+  quizTitle: 'Are you an introvert or an extrovert?',
+};
+
+const defaultResults: QuizResultsProps = {
+  score: 2,
+};
+
 export function App() {
   return (
     <StyledApp>
-      <Question
-        {...defaultQustion}
-        onNext={(value) => console.log({ value })}
-      />
+      <Space direction="vertical">
+        <StartQuiz {...defaultQuiz} />
+        <Question
+          {...defaultQustion}
+          onNext={(value) => console.log({ value })}
+        />
+        <QuizResults {...defaultResults} />
+      </Space>
     </StyledApp>
   );
 }
