@@ -16,3 +16,9 @@ export const ErrorCard: FC = () => (
     <StyledTitle>Something bad happened</StyledTitle>
   </StyledCard>
 );
+
+export const LoadingCard: FC = () => (
+  <StyledCard loading>
+    <StyledTitle>Data is loading</StyledTitle>
+  </StyledCard>
+);

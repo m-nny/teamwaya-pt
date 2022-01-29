@@ -1,11 +1,35 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { StyledCard, StyledTitle } from './styled';
+import { ErrorCard, LoadingCard, StyledCard, StyledTitle } from './styled';
 
-export type QuizResultsProps = {
-  score: number;
+export type QuizResultsProps = UseScoreArgs;
+
+type UseScoreArgs = {
+  name: string;
+  quizId: number;
+  answers: number[];
 };
-export const QuizResults: FC<QuizResultsProps> = ({ score }) => {
+const useScore = (_: UseScoreArgs) => {
+  const [score, setScore] = useState<number>();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const tm = setTimeout(() => {
+      setScore(20);
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(tm);
+  });
+  return { score, loading };
+};
+
+export const QuizResults: FC<QuizResultsProps> = ({ ...scoreArgs }) => {
+  const { score, loading } = useScore({ ...scoreArgs });
+  if (loading) {
+    return <LoadingCard />;
+  }
+  if (!score) {
+    return <ErrorCard />;
+  }
   let results = 'uncertain';
   if (score >= 2) {
     results = 'extrovert';
