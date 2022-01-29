@@ -5,6 +5,6 @@ export class AnswerEntity {
 
 export class QuestionEntity {
   public id!: number;
-  public question!: string;
+  public text!: string;
   public answers!: AnswerEntity[];
 }

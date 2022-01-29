@@ -4,11 +4,17 @@ import { StyledCard } from './styled';
 
 export type StartQuizProps = {
   quizTitle: string;
+  onStart?: (name: string) => void;
 };
-export const StartQuiz: FC<StartQuizProps> = ({ quizTitle }) => {
+export const StartQuiz: FC<StartQuizProps> = ({ quizTitle, onStart }) => {
   const [name, setName] = useState<string>();
   const handleNameChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setName(e.target.value);
+  };
+  const handleStart = () => {
+    if (name) {
+      onStart?.(name);
+    }
   };
   return (
     <StyledCard title={quizTitle}>
@@ -18,7 +24,7 @@ export const StartQuiz: FC<StartQuizProps> = ({ quizTitle }) => {
           value={name}
           onChange={handleNameChange}
         />
-        <Button type="primary" disabled={!name}>
+        <Button type="primary" disabled={!name} onClick={handleStart}>
           Start
         </Button>
       </Space>

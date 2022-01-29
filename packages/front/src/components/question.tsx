@@ -1,26 +1,33 @@
 import { Button, Progress, Radio, RadioChangeEvent, Space } from 'antd';
 import _ from 'lodash';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { StyledCard, StyledTitle } from './styled';
 
-export type QuestionProps = {
-  title: string;
-  currentQuestion: number;
-  totalQuestions: number;
-  answers: string[];
-  onNext?: (answerIdx: number) => void;
+type Question = {
+  text: string;
+  answers: { text: string }[];
 };
 
-export const Question: FC<QuestionProps> = ({
-  title,
+export type QuestionProps = {
+  currentQuestion: number;
+  totalQuestions: number;
+  question: Question;
+  onNext?: (answerIdx: number) => void;
+  onFinish?: (answerIdx: number) => void;
+};
+
+export const QuizQuestion: FC<QuestionProps> = ({
   currentQuestion,
   totalQuestions,
-  answers,
   onNext,
+  question,
 }) => {
   const progressPercent = _.round((currentQuestion / totalQuestions) * 100);
   const [selected, setSelected] = useState<number>();
+  useEffect(() => {
+    setSelected(undefined);
+  }, [question]);
   const handleRadioChange = (e: RadioChangeEvent) => {
     setSelected(e.target.value);
   };
@@ -33,12 +40,12 @@ export const Question: FC<QuestionProps> = ({
     <StyledCard title={`Question ${currentQuestion} of ${totalQuestions}`}>
       <Space direction="vertical">
         <StyledProgress percent={progressPercent} />
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTitle>{question.text}</StyledTitle>
         <Radio.Group onChange={handleRadioChange}>
           <Space direction="vertical">
-            {answers.map((answer, idx) => (
+            {question.answers.map((answer, idx) => (
               <StyledRadio value={idx} key={idx}>
-                {answer}
+                {answer.text}
               </StyledRadio>
             ))}
           </Space>

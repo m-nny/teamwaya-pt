@@ -7,7 +7,7 @@ export const mockQuizEntityes: QuizEntity[] = [
     questions: [
       {
         id: 1,
-        question: `You're really busy at work and a colleague is telling you their life story and personal woes. You:`,
+        text: `You're really busy at work and a colleague is telling you their life story and personal woes. You:`,
         answers: [
           { text: `Don't dare to interrupt them`, score: +2 },
           {
