@@ -1,47 +1,38 @@
-import React, { FC, useEffect, useState } from 'react';
+import { Button, Space } from 'antd';
+import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { ErrorCard, LoadingCard, StyledCard, StyledTitle } from './styled';
+import { ResponseEntity } from '../api/types';
+import { AppRoutes } from '../routes';
+import { StyledCard, StyledTitle } from './styled';
 
-export type QuizResultsProps = UseScoreArgs;
-
-type UseScoreArgs = {
-  name: string;
-  quizId: number;
-  answers: number[];
-};
-const useScore = (_: UseScoreArgs) => {
-  const [score, setScore] = useState<number>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const tm = setTimeout(() => {
-      setScore(20);
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(tm);
-  });
-  return { score, loading };
+export type QuizResultsProps = {
+  response: ResponseEntity;
 };
 
-export const QuizResults: FC<QuizResultsProps> = ({ ...scoreArgs }) => {
-  const { score, loading } = useScore({ ...scoreArgs });
-  if (loading) {
-    return <LoadingCard />;
-  }
-  if (!score) {
-    return <ErrorCard />;
-  }
-  let results = 'uncertain';
-  if (score >= 2) {
-    results = 'extrovert';
-  }
-  if (score <= -2) {
-    results = 'introvert';
-  }
+export const QuizResults: FC<QuizResultsProps> = ({ response }) => {
+  const history = useHistory();
+  const handleTryAgain = () => {
+    history.push(AppRoutes.Home);
+  };
+  const handleAllResults = () => {
+    history.push(AppRoutes.AllResults);
+  };
   return (
     <StyledCard title="Quiz Results">
-      <StyledTitle>
-        Your are <StyledResults>{results}</StyledResults>
-      </StyledTitle>
+      <Space direction="vertical">
+        <StyledTitle>
+          Your are <StyledResults>{response.verdict}</StyledResults>
+        </StyledTitle>
+        <Space direction="horizontal">
+          <Button type="dashed" onClick={handleTryAgain}>
+            Try again
+          </Button>
+          <Button type="primary" onClick={handleAllResults}>
+            Watch all results
+          </Button>
+        </Space>
+      </Space>
     </StyledCard>
   );
 };

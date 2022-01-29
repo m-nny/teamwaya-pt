@@ -4,6 +4,7 @@ export class ResponseEntity {
   public username!: string;
   public answers!: number[];
   public score!: number;
+  public verdict!: string;
 }
 
-export type CreateResponse = Omit<ResponseEntity, 'score' | 'id'>;
+export type CreateResponse = Omit<ResponseEntity, 'score' | 'id' | 'verdict'>;

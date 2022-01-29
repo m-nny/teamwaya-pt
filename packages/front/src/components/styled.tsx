@@ -11,9 +11,12 @@ export const StyledTitle = styled.div`
   font-weight: bold;
 `;
 
-export const ErrorCard: FC = () => (
+export type ErrorCardProps = {
+  error?: Error;
+};
+export const ErrorCard: FC<ErrorCardProps> = ({ error }) => (
   <StyledCard>
-    <StyledTitle>Something bad happened</StyledTitle>
+    <StyledTitle>{error?.message ?? 'Something bad happened'}</StyledTitle>
   </StyledCard>
 );
 

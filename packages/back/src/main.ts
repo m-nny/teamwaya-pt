@@ -8,6 +8,10 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({}));
 
+  app.enableCors({
+    origin: ['http://localhost:4200'],
+  });
+
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 

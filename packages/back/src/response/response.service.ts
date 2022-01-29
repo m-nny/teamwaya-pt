@@ -15,26 +15,34 @@ export class ResponseService {
     return this.responses;
   }
   public create(body: CreateResponse) {
-    const score = this.calculateScore(body);
+    const { score, verdict } = this.calculateScore(body);
     const item: ResponseEntity = {
       ...body,
       id: this.responses.length + 1,
       score: score,
+      verdict: verdict,
     };
     this.responses.push(item);
     return item;
   }
-  private calculateScore(body: CreateResponse): number {
+  private calculateScore(body: CreateResponse) {
     const quiz = this.quizService.findBydId(body.quizId);
     if (!quiz) {
       throw new InternalServerErrorException('Quiz does not exist');
     }
-    const totalScore = _(body.answers)
+    const score = _(body.answers)
       .map(
         (answerId, questionIdx) =>
           quiz.questions[questionIdx].answers[answerId].score
       )
       .sum();
-    return totalScore;
+    let verdict = 'uncertain';
+    if (score > 2) {
+      verdict = 'introvert';
+    }
+    if (score < -2) {
+      verdict = 'extravert';
+    }
+    return { score, verdict };
   }
 }

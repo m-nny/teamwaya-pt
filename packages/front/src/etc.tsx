@@ -1,4 +1,6 @@
-export const mockQuiz = {
+import { QuizEntity } from './api/types';
+
+export const mockQuiz: QuizEntity = {
   id: 1,
   title: 'Are you an introvert or an extrovert?',
   questions: [
@@ -39,5 +41,3 @@ export const mockQuiz = {
     },
   ],
 };
-
-export type Quiz = typeof mockQuiz;
